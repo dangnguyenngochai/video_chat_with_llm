@@ -1,4 +1,7 @@
 openai-whisper
 openai
-moviepy
 opencv-python
+langchain
+moviepy
+sentence-transformers
+qdrant_client
