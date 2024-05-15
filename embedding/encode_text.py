@@ -40,12 +40,12 @@ class EmcodedTranscriptpionVectorStore:
             )
             documents = text_splitter.split_documents(raw_documents)
             _ = self.vector_store.add_documents(documents)
-            self.vector_store = Qdrant.from_documents(
-                documents,
-                self.emd_model,
-                path=self.qdrant_local_path,
-                collection_name=collection_name
-            )
+            # self.vector_store = Qdrant.from_documents(
+            #     documents,
+            #     self.emd_model,
+            #     path=self.qdrant_local_path,
+            #     collection_name=collection_name
+            # )
 
         except Exception as ex:
             print(ex)
