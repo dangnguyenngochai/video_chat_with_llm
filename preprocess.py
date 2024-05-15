@@ -25,12 +25,17 @@ def extract_transcription(video_file_path):
         with open(transcription_file_path, 'w+') as file:
             data = []
             for seg in transcription['segments']:
-                start = seg['start']
-                end = seg['end']
+                start = str(seg['start'])
+                end = str(seg['end'])
                 text = seg['text']
-                rec = ','.join([start, end, text])
+                rec = ','.join([start, end, text, '\n'])
                 data.append(rec)
             file.writelines(data)
     else:
         print("Video path not exist")
 
+#preparing frames
+def extract_frames(timespan: list = None):
+    if timespan is not None:
+        pass
+    print("working")
