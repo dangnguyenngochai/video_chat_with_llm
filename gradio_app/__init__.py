@@ -1,1 +1,0 @@
-from theme import minigptlv_style, custom_css,text_css
