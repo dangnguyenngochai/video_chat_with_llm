@@ -1,5 +1,5 @@
+import sys
 from pytubefix import YouTube
-
 import gradio as gr
 
 import gradio_app
@@ -11,7 +11,8 @@ from preprocess import (
     )
 
 from main import process_videos
-import sys
+
+from config import EMB_MODEL
 
 sys.path.append('/embedding')
 sys.path.append('/retrieval_generation')
@@ -163,5 +164,6 @@ with gr.Blocks(title="Video Chat Prototype 🎞️🍿",css=text_css ) as demo :
 if __name__ == "__main__":
     print("Setting things up....")
     print("Loading embeddings")
-    
+    _ = EMB_MODEL
+    print("Done")
     demo.queue().launch(share=True,show_error=True, server_port=2411)
