@@ -66,56 +66,56 @@ with gr.Blocks(title="Video Chat Prototype 🎞️🍿",css=text_css ) as demo :
             with gr.Column():
                 answer_local=gr.Text("Answer will be here",label="MiniGPT4-video Answer")
         
-        process_button_local.click(fn=gradio_demo_local, inputs=[video_player_local, question_local], outputs=[answer_local])
+        process_button_local.click(fn=run_demo, inputs=[video_player_local, question_local], outputs=[answer_local])
         
-    with gr.Tab("Youtube videos"):
-        # youtube_interface=gr.Interface(
-        #     fn=gradio_demo_youtube,
-        #     inputs=[gr.Textbox(label="Enter the youtube link"),gr.Checkbox(label='Use subtitles'),gr.Textbox(label="Write any Question")],
-        #     outputs=["text",
-        #             ],
-        #     # title="<h2>YouTube videos</h2>",
-        #     description="Videos length should be from one to two minutes",
-        #     examples=[
-        #         ["https://www.youtube.com/watch?v=8kyg5u6o21k", True, "What happens in this video?"],
-        #         ["https://www.youtube.com/watch?v=zWfX5jeF6k4", True, "what is the main idea in this video?"],
-        #         ["https://www.youtube.com/watch?v=W5PRZuaQ3VM", True, "Inspired by this video content suggest a creative advertisement about the same content."],
-        #         ["https://www.youtube.com/watch?v=W8jcenQDXYg", True, "Describe what happens in this video."],
-        #         ["https://www.youtube.com/watch?v=u3ybWiEUaUU", True, "what is creative in this video ?"],
-        #         ["https://www.youtube.com/watch?v=nEwfSZfz7pw", True, "What Monica did in this video ?"],
-        #     ],
-        #     css=custom_css,  # Apply custom CSS
-        #     allow_flagging='auto',
-        # )
-        with gr.Row():
-            with gr.Column():
-                youtube_link = gr.Textbox(label="Enter the youtube link", placeholder="Paste YouTube URL with this format 'https://www.youtube.com/watch?v=video_id'")
-                video_player = gr.Video(autoplay=False)
-                download_finish = gr.State(value=False)
-                youtube_link.change(
-                    fn=download_video,
-                    inputs=[youtube_link, download_finish], 
-                    outputs=[video_player, download_finish]
-                )
-                question = gr.Textbox(label="Your Question", placeholder="Default: What's this video talking about?")
-                has_subtitles = gr.Checkbox(label="Use subtitles", value=True)
-                process_button = gr.Button("Answer the Question (QA)")
+    # with gr.Tab("Youtube videos"):
+    #     # youtube_interface=gr.Interface(
+    #     #     fn=gradio_demo_youtube,
+    #     #     inputs=[gr.Textbox(label="Enter the youtube link"),gr.Checkbox(label='Use subtitles'),gr.Textbox(label="Write any Question")],
+    #     #     outputs=["text",
+    #     #             ],
+    #     #     # title="<h2>YouTube videos</h2>",
+    #     #     description="Videos length should be from one to two minutes",
+    #     #     examples=[
+    #     #         ["https://www.youtube.com/watch?v=8kyg5u6o21k", True, "What happens in this video?"],
+    #     #         ["https://www.youtube.com/watch?v=zWfX5jeF6k4", True, "what is the main idea in this video?"],
+    #     #         ["https://www.youtube.com/watch?v=W5PRZuaQ3VM", True, "Inspired by this video content suggest a creative advertisement about the same content."],
+    #     #         ["https://www.youtube.com/watch?v=W8jcenQDXYg", True, "Describe what happens in this video."],
+    #     #         ["https://www.youtube.com/watch?v=u3ybWiEUaUU", True, "what is creative in this video ?"],
+    #     #         ["https://www.youtube.com/watch?v=nEwfSZfz7pw", True, "What Monica did in this video ?"],
+    #     #     ],
+    #     #     css=custom_css,  # Apply custom CSS
+    #     #     allow_flagging='auto',
+    #     # )
+    #     with gr.Row():
+    #         with gr.Column():
+    #             youtube_link = gr.Textbox(label="Enter the youtube link", placeholder="Paste YouTube URL with this format 'https://www.youtube.com/watch?v=video_id'")
+    #             video_player = gr.Video(autoplay=False)
+    #             download_finish = gr.State(value=False)
+    #             youtube_link.change(
+    #                 fn=download_video,
+    #                 inputs=[youtube_link, download_finish], 
+    #                 outputs=[video_player, download_finish]
+    #             )
+    #             question = gr.Textbox(label="Your Question", placeholder="Default: What's this video talking about?")
+    #             has_subtitles = gr.Checkbox(label="Use subtitles", value=True)
+    #             process_button = gr.Button("Answer the Question (QA)")
                 
-            with gr.Column():
-                answer=gr.Text("Answer will be here",label="MiniGPT4-video Answer")
+    #         with gr.Column():
+    #             answer=gr.Text("Answer will be here",label="MiniGPT4-video Answer")
         
-        process_button.click(fn=gradio_demo_youtube, inputs=[youtube_link, has_subtitles, question], outputs=[answer])
-        ## Add examples to make the demo more interactive and user-friendly
-        # with gr.Row():
-        #     url_1=gr.Text("https://www.youtube.com/watch?v=8kyg5u6o21k")
-        #     has_sub_1=True
-        #     q_1=gr.Text("What happens in this video?")
-        #     # add button to change the youtube link and the question with the example values
-        #     use_example_1_btn=gr.Button("Use this example")
-        #     use_example_1_btn.click(use_example,inputs=[url_1,has_sub_1,q_1])
+    #     process_button.click(fn=gradio_demo_youtube, inputs=[youtube_link, has_subtitles, question], outputs=[answer])
+    #     ## Add examples to make the demo more interactive and user-friendly
+    #     # with gr.Row():
+    #     #     url_1=gr.Text("https://www.youtube.com/watch?v=8kyg5u6o21k")
+    #     #     has_sub_1=True
+    #     #     q_1=gr.Text("What happens in this video?")
+    #     #     # add button to change the youtube link and the question with the example values
+    #     #     use_example_1_btn=gr.Button("Use this example")
+    #     #     use_example_1_btn.click(use_example,inputs=[url_1,has_sub_1,q_1])
             
         
 
 
 if __name__ == "__main__":
-    demo.queue().launch(share=True,show_error=True, server_port=args.gradio_port)
+    demo.queue().launch(share=True,show_error=True)
