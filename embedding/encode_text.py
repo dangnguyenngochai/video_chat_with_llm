@@ -54,6 +54,15 @@ class EmcodedTranscriptpionVectorStore:
         documents = text_splitter.split_documents(raw_documents)
         return documents
     
+    def get_retriever(self, top_k):
+        if self.vector_store is not None:
+            # using cosine similarity
+            retriever = self.vector_store.as_retriever(search_type="similarity",
+                                                 search_kwargs={"k": top_k})
+            return retriever
+        else:
+            print("The transcript has not been loaded into the vector database")
+
     def embeddings_transcription(self, transcription_data_path: str, collection_name: str):
         try:
             documents = self.__load_transcription_segments(transcription_data_path)
@@ -69,22 +78,20 @@ class EmcodedTranscriptpionVectorStore:
                 )
         except Exception as ex:
             print(ex)
-    
-    def retrieve(self, query, top_k):
-        if self.vector_store is not None:
-            # using cosine similarity
-            retriever = self.vector_store.as_retriever(search_type="similarity",
-                                                 search_kwargs={"k": top_k})
+
+    def query_relevants(self, query, top_k):
+        # using cosine similarity
+        retriever = self.get_retriever(top_k)
+        if retriever is not None:
             relevants = retriever.invoke(query)
             return relevants
-        else:
-            print("The transcript has not been loaded into the vector database")
-            
-if __name__ == "__main__":
+
+def test_run() -> EmcodedTranscriptpionVectorStore:
     test_transcription_path = 'video_chat_with_llm/state_of_union.txt'
     test_query = "What did America do during Covid-19 to migitate its impact ?"
     model_name = "Alibaba-NLP/gte-large-en-v1.5"
     collection_name = 'transcription_state_of_union'
+
     try:
 #         qdrant_client = QdrantClient(path='local_qdrant')
         qdrant_client = QdrantClient(location=':memory:')
@@ -94,8 +101,13 @@ if __name__ == "__main__":
         vstore.embeddings_transcription(test_transcription_path, collection_name)
         
         # test query
-        relevants = vstore.retrieve(test_query, 1)
+        print('Running test for querying the indexed data')
+        relevants = vstore.query_relevants(test_query, 1)
         print(relevants)
+
+        return vstore
     except Exception as ex:
         print(ex)
 
+if __name__ == "__main__":
+    test_run()
