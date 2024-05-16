@@ -36,7 +36,8 @@ def process_videos(video_file_path, query):
         response = generate_response(vstore, query)
         
         print("Question:", query, '\n', "Answer:", response)
-        
+        return response
+    
     except Exception as ex:
         print(ex)
         print("Nice try !!!")
