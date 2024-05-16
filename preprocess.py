@@ -5,7 +5,7 @@ import os
 
 # preparing transcription
 def extract_transcription(video_file_path):
-    
+
     def extract_audio(video_file_path):
         video = movie_editor.VideoFileClip(video_file_path)
         audio = video.audio
@@ -29,7 +29,7 @@ def extract_transcription(video_file_path):
                 start = str(seg['start'])
                 end = str(seg['end'])
                 text = seg['text']
-                rec = ','.join([start, end, text, '\n'])
+                rec = ','.join([start, end, text])
                 data.append(rec)
             print('Write transcriptions at', transcription_file_path)
             file.writelines(data)

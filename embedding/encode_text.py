@@ -9,7 +9,7 @@ import torch.nn.functional as F
 
 from qdrant_client import QdrantClient
 import pathlib
-
+from transcription_loader import TranscriptionLoader
 
 class EmcodedTranscriptpionVectorStore:
     def __init__(self, emd_model_name, collection_name,  qdrant_client):
@@ -34,7 +34,8 @@ class EmcodedTranscriptpionVectorStore:
             
     def __load_loader(self,ext):
         support_ext = {
-            '.txt': TextLoader
+            '.txt': TextLoader,
+            '.csv': TranscriptionLoader
         }
         if support_ext.get(ext, False):
             return support_ext.get(ext)
@@ -46,12 +47,15 @@ class EmcodedTranscriptpionVectorStore:
         
         raw_documents = document_loader(transcription_data_path).load()
         
-        text_splitter = CharacterTextSplitter(
-            separator="\n\n",
-            is_separator_regex=False,
-        )
-        
-        documents = text_splitter.split_documents(raw_documents)
+        if document_loader is TextLoader:
+            text_splitter = CharacterTextSplitter(
+                separator="\n\n",
+                is_separator_regex=False,
+            )
+            
+            documents = text_splitter.split_documents(raw_documents)
+        else:
+            documents = raw_documents
         return documents
     
     def get_retriever(self, top_k):
