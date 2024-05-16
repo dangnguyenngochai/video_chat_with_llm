@@ -4,7 +4,7 @@ from langchain_text_splitters import CharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.schema import Document
 
-import torch.nn.functional as F
+# import torch.nn.functional as F
 # from transformers import AutoModel, AutoTokenizer
 
 from qdrant_client import QdrantClient
