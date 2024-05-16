@@ -40,7 +40,8 @@ def process_videos(video_file_path, query):
         print("Question:", query, '\n', "Answer:", response.content)
         
     except Exception as ex:
-        print("Nice try !!! Keep working !!!")
+        print(ex)
+        print("Nice try !!!")
 
 if __name__ == "__main__":
     test_file_path = 'data/video/cX4DUogRjso.mp4'

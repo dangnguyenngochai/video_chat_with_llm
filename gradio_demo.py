@@ -50,12 +50,14 @@ def run_demo_youtube_video(youtube_url, query):
         video_file_path = get_video_url(youtube_url)
         process_videos(video_file_path, query)
     except Exception as ex:
+        print(ex)
         print('Keep going !!! Almost there')
 
 def run_demo_local_video(video_file_path, query):
     try:
         process_videos(video_file_path, query)
     except Exception as ex:
+        print(ex)
         print('Keep going !!! Almost there')
 
 title = """<h1 align="center">MiniGPT4-video 🎞️🍿</h1>"""
