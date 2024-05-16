@@ -21,6 +21,8 @@ class EmcodedTranscriptpionVectorStore:
         
         self.collection_name = collection_name
         self.qdrant_local_path = "local_qdrant"
+        self.qdrant_client = qdrant_client
+
         if model is not None:
             self.emd_model = model
         else:
@@ -76,8 +78,13 @@ class EmcodedTranscriptpionVectorStore:
             print("The transcript has not been loaded into the vector database")
 
     def embeddings_transcription(self, transcription_data_path: str, collection_name: str):
-        try:
+        try:            
+            if self.qdrant_client.collection_exists(self.collection_name):
+                print("Transcription is indexed")
+                return None
+            
             documents = self.__load_transcription_segments(transcription_data_path)
+
             if self.vector_store is not None:
                 _ = self.vector_store.add_documents(documents)
             else:       

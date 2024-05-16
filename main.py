@@ -21,7 +21,6 @@ def get_audio_transcription_path(video_file_path):
 
 def process_videos(video_file_path, query):
     try:
-        
         extract_transcription(video_file_path)
         
         filename, audio_file_path, transcription_file_path = get_audio_transcription_path(video_file_path)
@@ -29,7 +28,7 @@ def process_videos(video_file_path, query):
 
         qdrant_client = QdrantClient(location=':memory:')
         collection_name = 'transcription_' + filename
-
+        
         vstore = EmcodedTranscriptpionVectorStore(model=EMB_MODEL, collection_name=collection_name, qdrant_client=qdrant_client)
         
         vstore.embeddings_transcription(transcription_file_path, collection_name)
