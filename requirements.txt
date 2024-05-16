@@ -9,3 +9,4 @@ langchain-cohere
 pillow
 langchainhub
 gradio
+pytubefix
