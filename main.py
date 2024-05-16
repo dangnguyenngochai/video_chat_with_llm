@@ -20,11 +20,12 @@ def get_audio_transcription_path(video_file_path):
     return name, audio_file_path, transcription_file_path
 
 def process_videos(video_file_path, query):
-    try:
-        extract_transcription(video_file_path)
-        
+    try:        
         filename, audio_file_path, transcription_file_path = get_audio_transcription_path(video_file_path)
         print('Fetching files...Done')
+        
+        if not os.path.exists(transcription_file_path):
+            extract_transcription(video_file_path)
 
         qdrant_client = QdrantClient(location=':memory:')
         collection_name = 'transcription_' + filename

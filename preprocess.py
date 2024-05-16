@@ -3,8 +3,13 @@ import moviepy.editor as movie_editor
 
 import os
 
-# preparing transcription
+def get_audio_transcription_path(video_file_path):
+    name = video_file_path.split('/')[-1].split('.')[0]
+    audio_file_path='data/audio/%s.mp3'%name
+    transcription_file_path='data/transcription/%s.csv'%name
+    return name, audio_file_path, transcription_file_path
 
+# preparing transcription
 def extract_transcription(video_file_path):
 
     def extract_audio(video_file_path):
