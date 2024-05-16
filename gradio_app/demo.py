@@ -8,7 +8,7 @@ video_path=""
 import gradio as gr
 from theme import minigptlv_style, custom_css,text_css
 
-from .. import preprocess
+import preprocess
 from preprocess import (
     extract_transcription,
     extract_frames
