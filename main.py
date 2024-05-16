@@ -11,7 +11,7 @@ import os
 from embedding import *
 from retrieval_generation import *
 
-EMB_MODEL = "Alibaba-NLP/gte-large-en-v1.5"
+from config import EMB_MODEL
 
 def get_audio_transcription_path(video_file_path):
     name = video_file_path.split('/')[-1].split('.')[0]
@@ -30,11 +30,11 @@ def process_videos(video_file_path, query):
         qdrant_client = QdrantClient(location=':memory:')
         collection_name = 'transcription_' + filename
 
-        vstore = EmcodedTranscriptpionVectorStore(emd_model_name=EMB_MODEL, collection_name=collection_name, qdrant_client=qdrant_client)
+        vstore = EmcodedTranscriptpionVectorStore(model=EMB_MODEL, collection_name=collection_name, qdrant_client=qdrant_client)
         
         vstore.embeddings_transcription(transcription_file_path, collection_name)
         response = generate_response(vstore, query)
-
+        
         print("Question:", query, '\n', "Answer:", response)
         
     except Exception as ex:

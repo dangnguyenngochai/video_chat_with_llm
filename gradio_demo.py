@@ -161,4 +161,7 @@ with gr.Blocks(title="Video Chat Prototype 🎞️🍿",css=text_css ) as demo :
 
 
 if __name__ == "__main__":
+    print("Setting things up....")
+    print("Loading embeddings")
+    
     demo.queue().launch(share=True,show_error=True, server_port=2411)

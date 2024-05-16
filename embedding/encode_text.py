@@ -11,17 +11,25 @@ from qdrant_client import QdrantClient
 import pathlib
 from .transcription_loader import TranscriptionLoader
 
+from langchain_community.embeddings import HuggingFaceEmbeddings
+
 class EmcodedTranscriptpionVectorStore:
-    def __init__(self, emd_model_name, collection_name,  qdrant_client):
+    def __init__(self, collection_name, 
+                 qdrant_client, 
+                 model=None, 
+                 emb_model_name="Alibaba-NLP/gte-large-en-v1.5"):
+        
         self.collection_name = collection_name
         self.qdrant_local_path = "local_qdrant"
-        self.emd_model = HuggingFaceEmbeddings(
-            model_name=emd_model_name,
-            model_kwargs={
-                'trust_remote_code': True
-            }
-        )
-        
+        if model is not None:
+            self.emd_model = model
+        else:
+            self.emb_model_name =HuggingFaceEmbeddings(
+                model_name=emb_model_name,
+                model_kwargs={
+                    'trust_remote_code': True
+                }
+            )
         if not qdrant_client.collection_exists(self.collection_name):
             self.vector_store = None
         else:
@@ -94,12 +102,17 @@ def test_run() -> EmcodedTranscriptpionVectorStore:
     test_transcription_path = 'video_chat_with_llm/state_of_union.txt'
     test_query = "What did America do during Covid-19 to migitate its impact ?"
     model_name = "Alibaba-NLP/gte-large-en-v1.5"
+
+    import sys
+    sys.path.append('../')
+    from config import EMB_MODEL
+
     collection_name = 'transcription_state_of_union'
 
     try:
 #         qdrant_client = QdrantClient(path='local_qdrant')
         qdrant_client = QdrantClient(location=':memory:')
-        vstore = EmcodedTranscriptpionVectorStore(emd_model_name=model_name, collection_name=collection_name, qdrant_client=qdrant_client)
+        vstore = EmcodedTranscriptpionVectorStore(model=EMB_MODEL, collection_name=collection_name, qdrant_client=qdrant_client)
         
         # test embeddings
         vstore.embeddings_transcription(test_transcription_path, collection_name)
