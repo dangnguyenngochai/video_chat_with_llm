@@ -15,7 +15,7 @@ from preprocess import (
     extract_frames
     )
 
-from .main import process_videos
+from main import process_videos
 import sys
 
 sys.path.append('/embedding')
