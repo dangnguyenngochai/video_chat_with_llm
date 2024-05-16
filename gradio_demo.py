@@ -10,7 +10,7 @@ import gradio as gr
 import gradio_app
 from gradio_app.theme import minigptlv_style, custom_css,text_css
 
-from .preprocess import (
+from preprocess import (
     extract_transcription,
     extract_frames
     )

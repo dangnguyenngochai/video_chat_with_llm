@@ -2,7 +2,7 @@ print('testing out whisper openai api')
 
 # from openai import OpenAI
 
-from .preprocess import (
+from preprocess import (
     extract_transcription,
     extract_frames
     )
