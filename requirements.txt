@@ -5,3 +5,5 @@ langchain
 moviepy
 sentence-transformers
 qdrant_client
+langchain-google-genai 
+pillow
