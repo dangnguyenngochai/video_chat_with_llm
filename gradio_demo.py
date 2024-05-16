@@ -25,7 +25,7 @@ def get_video_url(url):
     video_stream = youtube.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
     # Download the video to the workspace folder
     print('Downloading video')
-    video_stream.download(output_path="workspace",filename=f"{video_id}.mp4")
+    video_stream.download(output_path="data/video",filename=f"{video_id}.mp4")
     print('Video downloaded successfully')
     return f"data/video/{video_id}.mp4"
 
@@ -38,7 +38,7 @@ def download_video(youtube_url, download_finish):
     # if has_subtitles:
     # Download the video to the workspace folder
     print('Downloading video')
-    video_stream.download(output_path="workspace",filename=f"{video_id}.mp4")
+    video_stream.download(output_path="data/video",filename=f"{video_id}.mp4")
     print('Video downloaded successfully')
     processed_video_path= f"data/video/{video_id}.mp4"
     download_finish = gr.State(value=True)
