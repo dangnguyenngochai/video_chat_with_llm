@@ -140,8 +140,10 @@ with gr.Blocks(title="Video Chat Prototype 🎞️🍿",css=text_css ) as demo :
                 
             with gr.Column():
                 answer=gr.Text("Answer will be here",label="MiniGPT4-video Answer")
-        
-        process_button.click(fn=run_demo_youtube_video, inputs=[youtube_link, question], outputs=[answer])
+        try:
+            process_button.click(fn=run_demo_youtube_video, inputs=[youtube_link, question], outputs=[answer])
+        except Exception as ex:
+            print(ex)
         ## Add examples to make the demo more interactive and user-friendly
         # with gr.Row():
         #     url_1=gr.Text("https://www.youtube.com/watch?v=8kyg5u6o21k")
