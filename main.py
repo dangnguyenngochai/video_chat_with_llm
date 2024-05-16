@@ -34,8 +34,8 @@ def process_videos(video_file_path, query):
         
         vstore.embeddings_transcription(transcription_file_path, collection_name)
         response = generate_response(vstore, query)
-        
-        print("Question:", query, '\n', "Answer:", response.content)
+
+        print("Question:", query, '\n', "Answer:", response)
         
     except Exception as ex:
         print(ex)

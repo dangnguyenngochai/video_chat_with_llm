@@ -48,14 +48,16 @@ def download_video(youtube_url, download_finish):
 def run_demo_youtube_video(youtube_url, query):
     try:
         video_file_path = get_video_url(youtube_url)
-        process_videos(video_file_path, query)
+        response = process_videos(video_file_path, query)
+        return response
     except Exception as ex:
         print(ex)
         print('Keep going !!! Almost there')
 
 def run_demo_local_video(video_file_path, query):
     try:
-        process_videos(video_file_path, query)
+        response = process_videos(video_file_path, query)
+        return response
     except Exception as ex:
         print(ex)
         print('Keep going !!! Almost there')
