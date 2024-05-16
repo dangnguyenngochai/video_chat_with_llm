@@ -13,6 +13,7 @@ def extract_transcription(video_file_path):
         audio_file = video_file_path.split('/')[-1].split('.')[0]
         audio_file_path = f'data/audio/{audio_file}.mp3'.format(audio_file)
         audio.write_audiofile(audio_file_path, codec="libmp3lame", bitrate="320k")
+        print('Write audio at', audio_file_path)
         return audio_file_path
 
     if os.path.exists(video_file_path):
