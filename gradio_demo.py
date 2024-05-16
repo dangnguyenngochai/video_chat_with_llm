@@ -6,9 +6,9 @@ paper_link="""<p><a href=''><img src='https://img.shields.io/badge/Paper-PDF-red
 video_path=""
 
 import gradio as gr
+from gradio_app import theme
 from theme import minigptlv_style, custom_css,text_css
 
-import preprocess
 from preprocess import (
     extract_transcription,
     extract_frames
