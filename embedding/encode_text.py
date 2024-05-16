@@ -9,7 +9,7 @@ from langchain.schema import Document
 
 from qdrant_client import QdrantClient
 import pathlib
-from transcription_loader import TranscriptionLoader
+from .transcription_loader import TranscriptionLoader
 
 class EmcodedTranscriptpionVectorStore:
     def __init__(self, emd_model_name, collection_name,  qdrant_client):
