@@ -65,9 +65,10 @@ with gr.Blocks(title="Video Chat Prototype 🎞️🍿",css=text_css ) as demo :
                 
             with gr.Column():
                 answer_local=gr.Text("Answer will be here",label="MiniGPT4-video Answer")
-        
-        process_button_local.click(fn=run_demo, inputs=[video_player_local, question_local], outputs=[answer_local])
-        
+        try:
+            process_button_local.click(fn=run_demo, inputs=[video_player_local, question_local], outputs=[answer_local])
+        except Exception as ex:
+            print(ex)
     # with gr.Tab("Youtube videos"):
     #     # youtube_interface=gr.Interface(
     #     #     fn=gradio_demo_youtube,
