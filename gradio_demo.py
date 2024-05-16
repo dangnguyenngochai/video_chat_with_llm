@@ -10,12 +10,16 @@ import gradio as gr
 import gradio_app
 from gradio_app.theme import minigptlv_style, custom_css,text_css
 
-from preprocess import (
+from .preprocess import (
     extract_transcription,
     extract_frames
     )
 
-from main import process_videos
+from .main import process_videos
+import sys
+
+sys.path.append('/embedding')
+sys.path.append('/retrieval_generation')
 
 def run_demo(video_file_path, query):
     try:
