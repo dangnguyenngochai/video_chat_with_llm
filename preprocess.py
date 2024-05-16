@@ -5,6 +5,7 @@ import os
 
 # preparing transcription
 def extract_transcription(video_file_path):
+    
     def extract_audio(video_file_path):
         video = movie_editor.VideoFileClip(video_file_path)
         audio = video.audio
@@ -20,7 +21,7 @@ def extract_transcription(video_file_path):
         transcription_file_path = 'data/transcription/%s.csv'%(audio_file_path.split('/')[-1].split('.')[0])
         
         #checkk transcription output
-        print(transcription['text'])
+        # print(transcription['text'])
         
         with open(transcription_file_path, 'w+') as file:
             data = []
@@ -30,6 +31,7 @@ def extract_transcription(video_file_path):
                 text = seg['text']
                 rec = ','.join([start, end, text, '\n'])
                 data.append(rec)
+            print('Write transcriptions at', transcription_file_path)
             file.writelines(data)
     else:
         print("Video path not exist")

@@ -8,3 +8,4 @@ qdrant_client
 langchain-cohere
 pillow
 langchainhub
+gradio

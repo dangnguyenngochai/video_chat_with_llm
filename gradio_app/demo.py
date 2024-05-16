@@ -4,7 +4,25 @@ project_page = """<p><a href='https://vision-cair.github.io/MiniGPT4-video/'><im
 code_link="""<p><a href='https://github.com/Vision-CAIR/MiniGPT4-video'><img src='https://img.shields.io/badge/Github-Code-blue'></a></p>"""
 paper_link="""<p><a href=''><img src='https://img.shields.io/badge/Paper-PDF-red'></a></p>"""
 video_path=""
-with gr.Blocks(title="MiniGPT4-video 🎞️🍿",css=text_css ) as demo :
+
+import gradio as gr
+from theme import minigptlv_style, custom_css,text_css
+
+from preprocess import (
+    extract_transcription,
+    extract_frames
+    )
+
+from main import process_videos
+
+def run_demo(video_file_path, query):
+    try:
+        process_videos(video_file_path, query)
+    except Exception as ex:
+        print('Keep going !!! Almost there')
+
+
+with gr.Blocks(title="Video Chat Prototype 🎞️🍿",css=text_css ) as demo :
     # with gr.Row():
     #     with gr.Column(scale=2):
     gr.Markdown(title)
@@ -36,13 +54,13 @@ with gr.Blocks(title="MiniGPT4-video 🎞️🍿",css=text_css ) as demo :
             with gr.Column():
                 video_player_local = gr.Video(sources=["upload"])
                 question_local = gr.Textbox(label="Your Question", placeholder="Default: What's this video talking about?")
-                has_subtitles_local = gr.Checkbox(label="Use subtitles", value=True)
+                # has_subtitles_local = gr.Checkbox(label="Use subtitles", value=True)
                 process_button_local = gr.Button("Answer the Question (QA)")
                 
             with gr.Column():
                 answer_local=gr.Text("Answer will be here",label="MiniGPT4-video Answer")
         
-        process_button_local.click(fn=gradio_demo_local, inputs=[video_player_local, has_subtitles_local, question_local], outputs=[answer_local])
+        process_button_local.click(fn=gradio_demo_local, inputs=[video_player_local, question_local], outputs=[answer_local])
         
     with gr.Tab("Youtube videos"):
         # youtube_interface=gr.Interface(
