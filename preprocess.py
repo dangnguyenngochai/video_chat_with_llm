@@ -4,6 +4,7 @@ import moviepy.editor as movie_editor
 import os
 
 # preparing transcription
+
 def extract_transcription(video_file_path):
 
     def extract_audio(video_file_path):
@@ -34,7 +35,7 @@ def extract_transcription(video_file_path):
             print('Write transcriptions at', transcription_file_path)
             file.writelines(data)
     else:
-        print("Video path not exist")
+        print("Video not exist at", video_file_path)
 
 #preparing frames
 def extract_frames(timespan: list = None):
