@@ -1,14 +1,15 @@
 import os
 from embedding import (
-    EmcodedTranscriptpionVectorStore, 
+    EmcodedTranscriptpionVectorStore,
+    EmcodedImgVectorStore,
     test_run as dummy_emb,
     )
 
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-# from langchain_google_genai import (
-#     GoogleGenerativeAI
-# )
+from langchain_google_genai import (
+    ChatGoogleGenerativeAI
+)
 from langchain import hub
 from langchain_cohere import ChatCohere
 
@@ -20,7 +21,7 @@ os.environ['COHERE_API_KEY'] = 'OhqrR0Bude8zr30XWVjreKC4LNbNHPhivxw7n0Vw'
 def prompt_generator(context, query):
     pass
     
-def generate_response(vstore: EmcodedTranscriptpionVectorStore, query: str): 
+def generate_response(vstore: EmcodedTranscriptpionVectorStore, img_vstore: Em, query: str): 
     def format_docs(docs):
         return "\n\n".join(doc.page_content for doc in docs)
     
